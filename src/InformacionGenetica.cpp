@@ -12,7 +12,7 @@ InformacionGenetica:: InformacionGenetica(){
 
 bool InformacionGenetica::esIgualA(InformacionGenetica* otra){
 
-	return (this->infoGenetica == otra->infoGenetica);
+	return 0 == (this->infoGenetica.compare(otra->infoGenetica));
 
 }
 

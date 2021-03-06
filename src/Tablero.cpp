@@ -78,6 +78,7 @@ void Tablero::cargarObjeto(string linea, idObjetos idObjeto){
 
 void Tablero::siguienteTurno() {
 	this->celulaManager.siguienteTurno();
+	this->numeroDeTurno++;
 }
 
 void Tablero::cargarGenEnUltimaCelula(string infoGenetica, short intensidad) {
@@ -141,9 +142,15 @@ void Tablero::mostrarTablero()	{
 	mostrarEstadisticas();
 }
 
+int Tablero::getNumeroDeTurno()	{
+	return this->numeroDeTurno;
+}
+
 void Tablero::mostrarEstadisticas()	{
-	cout<<"Turno numero:"<<endl;
-	cout<<"Celulas vivas: "<<celulaManager->getNumeroDeCelulasVivas()<<endl;
+	cout<<endl<<"Turno numero:"<<getNumeroDeTurno()<<endl;
+	cout<<"Celulas vivas: "<<celulaManager.getNumeroDeCelulasVivas()<<endl;
+	cout<<"Celulas recien nacidas: "<<celulaManager.getNumeroDeCelulasRecienNacidas()<<endl;
+	//cout<<"Celulas recien fallecidas: "<<celulaManager.getNumeroDeCelulasVivas()<<endl;
 }
 
 Tablero::Tablero()   {

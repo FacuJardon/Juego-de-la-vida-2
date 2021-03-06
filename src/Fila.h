@@ -23,6 +23,8 @@ public:
 
 	unsigned int getNumeroDeFila();
 
+	unsigned int getCelulasVivas();
+
 	bool agregarCelula(unsigned int columna);
 
 	bool getCelulaViva(unsigned int columna);

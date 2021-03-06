@@ -12,6 +12,18 @@ unsigned int Fila::getNumeroDeFila() {
 	return this->numeroDeFila;
 }
 
+unsigned int Fila::getCelulasVivas()	{
+	unsigned int celulasVivas = 0;
+	Columna *columnaAuxiliar;
+
+	this->columna->iniciarCursor();
+
+	while (this->columna->avanzarCursor())	{
+		columnaAuxiliar = this->columna->obtenerCursor();
+		celulasVivas += columnaAuxiliar->getCelulaVivas();
+	}
+	return celulasVivas;
+}
 
 bool Fila::agregarCelula(unsigned int columna) {
 

@@ -15,7 +15,7 @@ void realizarAccion(Tablero *tablero, OPCIONES opcion);
 
 int main(int argc, char const *argv[])
 {
-	std::string rutaDeArchivo = "E:\\Users\\Facu\\eclipse-workspace\\JuegoDeLaVida\\input\\input.txt";
+	std::string rutaDeArchivo = "/home/facu/eclipse-workspace/Juego de la vida 2.0/input/input.txt";
 /*
 	std::cout<<"Ingresa la ruta al archivo de ingreso de datos: ";
 	cin>>rutaDeArchivo;

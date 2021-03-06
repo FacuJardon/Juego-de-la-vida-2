@@ -18,6 +18,10 @@ void Celula::setCelulaViva(bool estadoDeCelula) {
 	this->estaViva = estadoDeCelula;
 }
 
+bool Celula::celulaViva()	{
+	return this->estaViva;
+}
+
 Lista<Gen*>* Celula::obtenerGenes() {
 	return this->genes;
 }

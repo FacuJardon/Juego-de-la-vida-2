@@ -50,6 +50,7 @@ private:
 
     void mostrarEstadisticas();
 
+    int getNumeroDeTurno();
 public:
 
     /*

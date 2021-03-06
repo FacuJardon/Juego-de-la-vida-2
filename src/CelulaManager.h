@@ -20,6 +20,7 @@ private:
 	Lista<Fila*>* filas;
 	unsigned int  filasMaximas;
 	unsigned int  columnasMaximas;
+	unsigned int  celulasRecienNacidas;
 	std::string genEnSeguimiento;
 
 	int calcularCelulasVecinas(unsigned int fila, unsigned int columna, unsigned int filas, unsigned int columnas);
@@ -35,7 +36,7 @@ private:
 	Lista<Gen*>* getGenes(unsigned int fila, unsigned int columna);
 
 	bool agregarCelula(unsigned int fila, unsigned int  columna);
-
+	Centoya
     unsigned int getColumnas();
 
     unsigned int getFilas();
@@ -54,7 +55,14 @@ private:
 
 	void borrarFilas(Lista<Fila*>* filasABorrar);
 
+	void aumentarCelulasRecienNacidas();
+
+	void reiniciarEstadisticas();
+
+	void generarNuevasFilas();
 public:
+	unsigned int getNumeroDeCelulasRecienNacidas();
+
 	unsigned int getNumeroDeCelulasVivas();
 
 	bool hayGenEnSeguimiento();

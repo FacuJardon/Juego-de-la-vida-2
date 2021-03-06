@@ -17,6 +17,8 @@ private:
 	Lista<Gen*>* genes;
 	bool estaViva;
 public:
+	bool celulaViva();
+
 	bool existeGen(std::string infoGenetica);
 
 	void setCelulaViva(bool estadoDeCelula);

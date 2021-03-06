@@ -18,6 +18,10 @@ void Columna::agregarCelula() {
 	this->celula->setCelulaViva(true);
 }
 
+unsigned int Columna::getCelulaVivas()	{
+	return this->celula->celulaViva()? 1 : 0;
+}
+
 Columna::Columna(unsigned int numeroDeColumna, bool estadoDeCelula) {
 	this->numeroDeColumna = numeroDeColumna;
 	this->celula = new Celula(estadoDeCelula);

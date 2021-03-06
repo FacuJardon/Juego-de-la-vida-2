@@ -111,10 +111,29 @@ bool CelulaManager::cargarGenEnUltimaCelula(string infoGenetica, short intensida
 
 	return posicionado;
 }
-unsigned int getNumeroDeCelulasVivas()	{
+unsigned int CelulaManager::getNumeroDeCelulasVivas()	{
+	unsigned int celulasVivas = 0;
+	Fila *filaAuxiliar;
 
+	this->filas->iniciarCursor();
+
+	while (this->filas->avanzarCursor())	{
+		filaAuxiliar = this->filas->obtenerCursor();
+		celulasVivas += filaAuxiliar->getCelulasVivas();
+	}
+
+	return celulasVivas;
 }
 void CelulaManager::siguienteTurno() {
+	reiniciarEstadisticas();
+	generarNuevasFilas();
+}
+
+void CelulaManager::reiniciarEstadisticas()	{
+	this->celulasRecienNacidas = 0;
+}
+
+void CelulaManager::generarNuevasFilas()	{
 	Lista<Fila*> *nuevasFilas = new Lista<Fila*>();
 	Lista<Fila*> *filasABorrar;
 	int celulasVecinas = 0;
@@ -171,9 +190,17 @@ void CelulaManager::setCelulaSiguienteEstado(Lista<Fila*> *nuevasFilas, unsigned
 		this->ultimaCelulaCargada[0] = fila;
 		this->ultimaCelulaCargada[1] = columna;
 
-		if (!celulaViva)
+		if (!celulaViva)	{
 			actualizarGenes(nuevasFilas, fila, columna);
+			this->aumentarCelulasRecienNacidas();
+		}
 	}
+}
+unsigned int CelulaManager::getNumeroDeCelulasRecienNacidas()	{
+	return this->celulasRecienNacidas;
+}
+void CelulaManager::aumentarCelulasRecienNacidas()	{
+	this->celulasRecienNacidas++;
 }
 
 void CelulaManager::actualizarGenes(Lista<Fila*> *nuevasFilas, unsigned int fila, unsigned int columna)	{
@@ -210,11 +237,13 @@ void CelulaManager::agregarGenesEnNuevaFila(unsigned int columna, Lista<Gen*>* g
 
 Lista<Gen*>* CelulaManager::getGenesFinal(Lista<Gen*>* genes)	{
 	Lista<Gen*>* genesFinal = new Lista<Gen*>;
-	Lista<Gen*>* genesComparando = new Lista<Gen*>;
+	Lista<Gen*>* genesComparando;
 	Gen *genAComparar, *genAux;
 	InformacionGenetica *infoGeneticaAComparar, *infoGeneticaAux;
 
 	for (unsigned int genIdAComparar = 1;genIdAComparar <= genes->contarElementos();genIdAComparar++)	{
+		genesComparando = new Lista<Gen*>;
+
 		genAComparar = genes->obtener(genIdAComparar);
 		infoGeneticaAComparar = genAComparar->getCargaGenetica();
 
@@ -228,8 +257,8 @@ Lista<Gen*>* CelulaManager::getGenesFinal(Lista<Gen*>* genes)	{
 			}
 		}
 		genesFinal->agregar(getGenTransferencia(genesComparando));
+		delete genesComparando;
 	}
-	delete genesComparando;
 	return genesFinal;
 }
 
@@ -339,6 +368,7 @@ CelulaManager::CelulaManager() {
 	this->ultimaCelulaCargada[1] = 0;
 	this->columnasMaximas = 0;
 	this->filasMaximas = 0;
+	this->celulasRecienNacidas = 0;
 	this->genEnSeguimiento = "";
 }
 

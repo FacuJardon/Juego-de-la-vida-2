@@ -18,6 +18,8 @@ private:
 	Celula* celula;
 
 public:
+	unsigned int getCelulaVivas();
+
 	void aumentarEdadDeGenes();
 
 	unsigned int getNumeroDeColumna();
