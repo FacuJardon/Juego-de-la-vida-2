@@ -17,11 +17,14 @@
 class CelulaManager {
 private:
 	unsigned int  ultimaCelulaCargada[2];
-	Lista<Fila*>* filas;
-	unsigned int  filasMaximas;
-	unsigned int  columnasMaximas;
-	unsigned int  celulasRecienNacidas;
 	std::string genEnSeguimiento;
+	Lista<Fila*>* filas;
+	unsigned int filasMaximas;
+	unsigned int columnasMaximas;
+	unsigned int celulasRecienNacidas;
+	unsigned int celulasRecienFallecidas;
+	unsigned int contadorDeCelulasNacidas;
+	unsigned int contadorDeCelulasFallecidas;
 
 	int calcularCelulasVecinas(unsigned int fila, unsigned int columna, unsigned int filas, unsigned int columnas);
 
@@ -36,7 +39,7 @@ private:
 	Lista<Gen*>* getGenes(unsigned int fila, unsigned int columna);
 
 	bool agregarCelula(unsigned int fila, unsigned int  columna);
-	Centoya
+
     unsigned int getColumnas();
 
     unsigned int getFilas();
@@ -57,10 +60,24 @@ private:
 
 	void aumentarCelulasRecienNacidas();
 
+	void aumentarCelulasRecienFallecidas();
+
 	void reiniciarEstadisticas();
 
 	void generarNuevasFilas();
+
+	void aumentarCelulasFallecidasTotales();
+
+	void aumentarCelulasNacidasTotales();
+
 public:
+
+	unsigned int getNumeroDeCelulasNacidasTotales();
+
+	unsigned int getNumeroDeCelulasFallecidasTotales();
+
+	unsigned int getNumeroDeCelulasRecienFallecidas();
+
 	unsigned int getNumeroDeCelulasRecienNacidas();
 
 	unsigned int getNumeroDeCelulasVivas();

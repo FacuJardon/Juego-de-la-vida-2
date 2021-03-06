@@ -24,7 +24,7 @@ private:
 
 	unsigned int filas;
 	unsigned int columnas;
-    int numeroDeTurno;
+    unsigned int numeroDeTurno;
     std::string genEnSeguimiento;
 	CelulaManager celulaManager;
 
@@ -50,7 +50,16 @@ private:
 
     void mostrarEstadisticas();
 
-    int getNumeroDeTurno();
+    unsigned int getNumeroDeTurno();
+
+    void iniciarAtributosPrimitivos();
+
+    unsigned int getPromedioDeCelulasNacidasPorTurno();
+
+    unsigned int getPromedioDeCelulasFallecidasPorTurno();
+
+    void procesarArchivo(std::string RutaDeArchivo);
+
 public:
 
     /*

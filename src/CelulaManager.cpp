@@ -131,6 +131,7 @@ void CelulaManager::siguienteTurno() {
 
 void CelulaManager::reiniciarEstadisticas()	{
 	this->celulasRecienNacidas = 0;
+	this->celulasRecienFallecidas = 0;
 }
 
 void CelulaManager::generarNuevasFilas()	{
@@ -193,15 +194,41 @@ void CelulaManager::setCelulaSiguienteEstado(Lista<Fila*> *nuevasFilas, unsigned
 		if (!celulaViva)	{
 			actualizarGenes(nuevasFilas, fila, columna);
 			this->aumentarCelulasRecienNacidas();
+			this->aumentarCelulasNacidasTotales();
 		}
 	}
+	else if (celulaViva)	{
+		this->aumentarCelulasRecienFallecidas();
+		this->aumentarCelulasFallecidasTotales();
+	}
 }
+unsigned int CelulaManager::getNumeroDeCelulasNacidasTotales()	{
+	return this->contadorDeCelulasNacidas;
+}
+void CelulaManager::aumentarCelulasNacidasTotales()	{
+	this->contadorDeCelulasNacidas++;
+}
+unsigned int CelulaManager::getNumeroDeCelulasFallecidasTotales()	{
+	return this->contadorDeCelulasFallecidas;
+}
+void CelulaManager::aumentarCelulasFallecidasTotales()	{
+	this->contadorDeCelulasFallecidas++;
+}
+
+unsigned int CelulaManager::getNumeroDeCelulasRecienFallecidas()	{
+	return this->celulasRecienFallecidas;
+}
+void CelulaManager::aumentarCelulasRecienFallecidas()	{
+	this->celulasRecienFallecidas++;
+}
+
 unsigned int CelulaManager::getNumeroDeCelulasRecienNacidas()	{
 	return this->celulasRecienNacidas;
 }
 void CelulaManager::aumentarCelulasRecienNacidas()	{
 	this->celulasRecienNacidas++;
 }
+
 
 void CelulaManager::actualizarGenes(Lista<Fila*> *nuevasFilas, unsigned int fila, unsigned int columna)	{
 	unsigned int numeroDeFilaApuntado = 0;
@@ -364,12 +391,15 @@ string CelulaManager::getUltimaCelulaString()	{
 }
 CelulaManager::CelulaManager() {
 	this->filas = new Lista<Fila*>();
+	this->genEnSeguimiento = "";
 	this->ultimaCelulaCargada[0] = 0;
 	this->ultimaCelulaCargada[1] = 0;
 	this->columnasMaximas = 0;
 	this->filasMaximas = 0;
 	this->celulasRecienNacidas = 0;
-	this->genEnSeguimiento = "";
+	this->celulasRecienFallecidas = 0;
+	this->contadorDeCelulasFallecidas = 0;
+	this->contadorDeCelulasNacidas = 0;
 }
 
 CelulaManager::~CelulaManager()	{

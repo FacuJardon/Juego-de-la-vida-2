@@ -9,6 +9,12 @@ Tablero::Tablero(int filas, int columnas, int numeroDeTurno)   {
 	this->genEnSeguimiento = "2";
 }
 Tablero::Tablero(string RutaDeArchivo)   {
+	this->iniciarAtributosPrimitivos();
+	this->procesarArchivo(RutaDeArchivo);
+
+}
+
+void Tablero::procesarArchivo(string RutaDeArchivo)	{
 	string line;
 	ifstream archivo(RutaDeArchivo);
 
@@ -22,7 +28,13 @@ Tablero::Tablero(string RutaDeArchivo)   {
 	}
 	else cout << "No se pudo acceder al archivo.";
 
-	this->genEnSeguimiento = "2";
+}
+
+void Tablero::iniciarAtributosPrimitivos()	{
+	this->genEnSeguimiento = "";
+	this->columnas = 0;
+	this->filas = 0;
+	this->numeroDeTurno = 1;
 }
 
 void Tablero::cargarEstructuraDeArchivo(string linea) {
@@ -142,15 +154,31 @@ void Tablero::mostrarTablero()	{
 	mostrarEstadisticas();
 }
 
-int Tablero::getNumeroDeTurno()	{
+unsigned int Tablero::getNumeroDeTurno()	{
 	return this->numeroDeTurno;
 }
 
+unsigned int Tablero::getPromedioDeCelulasNacidasPorTurno()	{
+	unsigned int celulasNacidas = celulaManager.getNumeroDeCelulasNacidasTotales();
+	if (celulasNacidas == 0)
+		return 0;
+	return celulasNacidas/this->getNumeroDeTurno();
+}
+unsigned int Tablero::getPromedioDeCelulasFallecidasPorTurno()	{
+	unsigned int celulasFallecidas = celulaManager.getNumeroDeCelulasFallecidasTotales();
+	if (celulasFallecidas == 0)
+		return 0;
+	return celulasFallecidas/this->getNumeroDeTurno();
+}
+
+
 void Tablero::mostrarEstadisticas()	{
-	cout<<endl<<"Turno numero:"<<getNumeroDeTurno()<<endl;
+	cout<<endl<<"Turno numero:"<<this->getNumeroDeTurno()<<endl;
 	cout<<"Celulas vivas: "<<celulaManager.getNumeroDeCelulasVivas()<<endl;
 	cout<<"Celulas recien nacidas: "<<celulaManager.getNumeroDeCelulasRecienNacidas()<<endl;
-	//cout<<"Celulas recien fallecidas: "<<celulaManager.getNumeroDeCelulasVivas()<<endl;
+	cout<<"Promedio de celulas nacidas por turno: "<<this->getPromedioDeCelulasNacidasPorTurno()<<endl;
+	cout<<"Celulas recien fallecidas: "<<celulaManager.getNumeroDeCelulasRecienFallecidas()<<endl;
+	cout<<"Promedio de celulas fallecidas por turno: "<<this->getPromedioDeCelulasFallecidasPorTurno()<<endl;
 }
 
 Tablero::Tablero()   {
